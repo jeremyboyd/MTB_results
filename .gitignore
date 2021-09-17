@@ -2,6 +2,8 @@
 .Rhistory
 .RData
 .Ruserdata
+.Rprofile
 .DS_Store
 www
 *.feather
+renv
