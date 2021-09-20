@@ -11,8 +11,13 @@ library(dplyr)
 library(forcats)
 library(lubridate)
 library(feather)
+source("get_race_urls.R")
+source("get_race_data.R")
 
-# Specify & set custom ggplot theme
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#### Define & set custom ggplot theme ####
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 my_theme <- function() {
     theme_classic() %+replace%
         theme(
@@ -24,6 +29,48 @@ my_theme <- function() {
         )
 }
 theme_set(my_theme())
+
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#### Check for new data ####
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+# In production this will be run from the polished server. Will the scraping actually work from there? Need to test.
+# Add a progress bar for scraping?
+# Only scrape for the first user of the week?
+# Faster if I store data in wide format?
+
+# Read in old table of race URLs
+race_urls_old <- read_feather("race_urls_old.feather")
+
+# Get up-to-date table of race URLs
+race_urls_new <- get_race_urls()
+
+# Returns rows representing new URLs
+new_urls <- anti_join(race_urls_new, race_urls_old)
+
+# Do this if there are new URLs
+if(nrow(new_urls) > 0) {
+    
+    # Scrape new data
+    new_data <- get_race_data(new_urls)
+    
+    # Read in old data
+    old_data <- read_feather("data_long.feather")
+    
+    # Combine old and new data
+    updated_data <- bind_rows(new_data, old_data) %>%
+        arrange(desc(Date), Division, Gender)
+    
+    # Write updated data to file
+    write_feather(updated_data, "data_long.feather")
+    
+    # Write updated historical race list to file
+    write_feather(race_urls_new, "race_urls_old.feather" )
+}
+
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#### Load data & set app variables ####
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 # Read in data
 df <- read_feather("data_long.feather") %>%
