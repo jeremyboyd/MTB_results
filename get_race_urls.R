@@ -13,6 +13,9 @@ get_race_urls <- function() {
     results_home <- "https://www.idahomtb.org/program-overview/race-series/results-2/"
     
     # Get html for everything in the accordion
+    # Need to do this before getting .elementor-tab-content, otherwise you only
+    # capture HTML from the first accordion item. Need to get all accordion
+    # items, then all tab content undeneath each of them.
     accordion_items <- read_html(results_home) %>%
         html_elements(".elementor-accordion-item")
     
