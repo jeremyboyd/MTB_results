@@ -3,10 +3,12 @@
 # Interscholastic Cycling League races.
 
 # TODO:
-# Set to automatically update. Maybe every time the app starts it looks for new race data posted to the results_home page? If there's new stuff, it scrapes it and adds to existing. See how long this takes to do. If it's too long, maybe only update weekly--e.g., Sunday at 11:55pm. Maybe set update so that it only happens on for the first user of a day?
-# Maybe save a scraped copy of the races table. For first user each day/week/whatever, compare this to a newly scraped version. If there are additional rows, do scraping for them. Add a progress bar if this takes too long.
 # Speed up deployment to polished by using wide format, dropping unused columns. So conversion to long would happen on app load.
-# Commit to git & github
+# Way to make more mobile friendly? Would have to break up faceted plots into singles. Is this how plotly handles facets natively?
+# Publish as a package?
+# Any "how to" topics for a wiki in here? Maybe something on using rvest & selectorGadget to scrape webpages?
+# https://rvest.tidyverse.org/articles/rvest.html
+# https://cran.r-project.org/web/packages/rvest/vignettes/rvest.html
 
 # Define server logic
 server <- function(input, output, session) {
