@@ -138,5 +138,5 @@ get_race_data <- function(races) {
                    TRUE ~ div)) %>%
         select(Place:Team, Division = div, Gender = gender, Date = date,
                Location = loc, Lap = lap, time_char, time_min)
-    
+    return(indiv_long)
 }
