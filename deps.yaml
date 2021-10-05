@@ -1,11 +1,23 @@
+tidyverse:
+  Package: tidyverse
+  Repository: CRAN
+  Version: 1.3.1
+rvest:
+  Package: rvest
+  Repository: CRAN
+  Version: 1.0.1
+lubridate:
+  Package: lubridate
+  Repository: CRAN
+  Version: 1.7.10
 shiny:
   Package: shiny
   Repository: CRAN
-  Version: 1.6.0
+  Version: 1.7.1
 shinyWidgets:
   Package: shinyWidgets
   Repository: CRAN
-  Version: 0.6.1
+  Version: 0.6.2
 ggplot2:
   Package: ggplot2
   Repository: CRAN
@@ -22,10 +34,6 @@ forcats:
   Package: forcats
   Repository: CRAN
   Version: 0.5.1
-lubridate:
-  Package: lubridate
-  Repository: CRAN
-  Version: 1.7.10
 feather:
   Package: feather
   Repository: CRAN
@@ -36,11 +44,7 @@ polished:
   GithubRepo: polished
   GithubRef: HEAD
   GithubSHA1: e01f2a1120436a181ba8ac8132e153cb5970b32d
-tidyverse:
-  Package: tidyverse
+stringr:
+  Package: stringr
   Repository: CRAN
-  Version: 1.3.1
-rvest:
-  Package: rvest
-  Repository: CRAN
-  Version: 1.0.1
+  Version: 1.4.0
