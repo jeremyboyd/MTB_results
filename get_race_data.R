@@ -28,7 +28,8 @@ get_race_data <- function(races) {
                 html_table(na.strings = c("NA", ""))
             
             # Extract individual results
-            temp <- map_dfr(tables_2015[seq(2, length(tables_2015), 2)], function(x) {
+            temp <- map_dfr(tables_2015[seq(2, length(tables_2015), 2)],
+                            function(x) {
                 current_df <- x
                 division <- current_df[1,]$X1
                 start_idx <- which(current_df$X1 == 1)
@@ -43,8 +44,10 @@ get_race_data <- function(races) {
             # More cleanup
             temp %>%
                 select(-X3,-X5, -X6) %>%
-                rename(Place = X1, Name = X2, Team = X4, `Lap 1` = X7,
-                       `Lap 2` = X8, `Lap 3` = X9, `Lap 4` = X10, `Lap 5` = X11) %>%
+                rename(
+                    Place = X1, Name = X2, Team = X4, `Lap 1` = X7,
+                    `Lap 2` = X8, `Lap 3` = X9, `Lap 4` = X10,
+                    `Lap 5` = X11) %>%
                 mutate(
                     Plate = str_extract(Name, "\\([0-9]+\\)"),
                     Plate = str_remove_all(Plate, "\\(|\\)"),
@@ -57,8 +60,8 @@ get_race_data <- function(races) {
                     loc = loc,
                     date = ymd(date),
                     url = url)  %>%
-                select(Place, Name, Plate, Team, `Lap 1`:`Lap 5`, loc, date, div,
-                       gender, url)
+                select(Place, Name, Plate, Team, `Lap 1`:`Lap 5`, loc, date,
+                       div, gender, url)
         }
         
         # All other years
