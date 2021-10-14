@@ -9,6 +9,7 @@ library(lubridate)
 
 # Function definition
 get_race_urls <- function() {
+    
     # Results home
     results_home <- "https://www.idahomtb.org/program-overview/race-series/results-2/"
     
